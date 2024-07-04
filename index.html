@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nesgym</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #c00;
+            padding: 10px 0;
+            text-align: center;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        nav {
+            text-align: center;
+            margin: 20px 0;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.2em;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        section {
+            margin: 20px 0;
+        }
+        section h2 {
+            border-bottom: 2px solid #c00;
+            padding-bottom: 5px;
+        }
+        footer {
+            background-color: #222;
+            color: #aaa;
+            text-align: center;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+        .motivational-quotes {
+            font-style: italic;
+            color: #c00;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .calculator {
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .calculator input, .calculator select {
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+        }
+        .calculator button {
+            background-color: #c00;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .calculator button:hover {
+            background-color: #900;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>nesgym</h1>
+    </header>
+    <nav>
+        <a href="#rutinas">Rutinas</a>
+        <a href="#calculadora">Calculadora de IMC</a>
+        <a href="#contacto">Contacto</a>
+    </nav>
+    <div class="container">
+        <section id="rutinas">
+            <h2>Rutinas para Clientes</h2>
+            <p>Aquí encontrarás rutinas personalizadas para alcanzar tus objetivos de fitness. ¡Empieza hoy mismo!</p>
+            <!-- Agrega más contenido sobre rutinas aquí -->
+        </section>
+        <section id="calculadora">
+            <h2>Calculadora de IMC</h2>
+            <div class="calculator">
+                <label for="height">Altura (cm):</label><br>
+                <input type="number" id="height" name="height"><br>
+                <label for="weight">Peso (kg):</label><br>
+                <input type="number" id="weight" name="weight"><br>
+                <label for="sex">Sexo:</label><br>
+                <select id="sex" name="sex">
+                    <option value="male">Masculino</option>
+                    <option value="female">Femenino</option>
+                </select><br>
+                <button onclick="calculateIMC()">Calcular IMC</button>
+                <p id="imcResult"></p>
+                <p id="weightRange"></p>
+            </div>
+        </section>
+        <section id="contacto">
+            <h2>Contacto</h2>
+            <p>Para más información, contáctame a través de mis redes sociales o envíame un correo electrónico.</p>
+            <!-- Agrega más detalles de contacto aquí -->
+        </section>
+        <div class="motivational-quotes">
+            <p>"El dolor que sientes hoy será la fuerza que sentirás mañana."</p>
+            <p>"El cuerpo logra lo que la mente cree."</p>
+            <p>"No se trata de ser el mejor. Se trata de ser mejor que ayer."</p>
+        </div>
+    </div>
+    <footer>
+        &copy; 2024 nesgym. Todos los derechos reservados.
+    </footer>
+
+    <script>
+        function calculateIMC() {
+            var height = document.getElementById('height').value;
+            var weight = document.getElementById('weight').value;
+            var sex = document.getElementById('sex').value;
+
+            if (height > 0 && weight > 0) {
+                var heightInMeters = height / 100;
+                var imc = weight / (heightInMeters * heightInMeters);
+                document.getElementById('imcResult').innerText = "Tu IMC es: " + imc.toFixed(2);
+
+                var minWeight, maxWeight;
+                if (sex === 'male') {
+                    minWeight = 18.5 * (heightInMeters * heightInMeters);
+                    maxWeight = 24.9 * (heightInMeters * heightInMeters);
+                } else {
+                    minWeight = 18.5 * (heightInMeters * heightInMeters);
+                    maxWeight = 24.9 * (heightInMeters * heightInMeters);
+                }
+                document.getElementById('weightRange').innerText = "El peso ideal para tu altura es entre " + minWeight.toFixed(2) + " kg y " + maxWeight.toFixed(2) + " kg.";
+            } else {
+                document.getElementById('imcResult').innerText = "Por favor, introduce valores válidos.";
+                document.getElementById('weightRange').innerText = "";
+            }
+        }
+    </script>
+</body>
+</html>
